@@ -15,7 +15,11 @@ const require = createRequire(import.meta.url);
 const pkg = require('./package.json');
 const modernizrConfig = require('./modernizr-config.json');
 
-const dirs = pkg['h5bp-configs'].directories;
+const configs = pkg['h5bp-configs'];
+
+const dirs = configs.directories;
+
+const {ga4} = configs;
 
 // ---------------------------------------------------------------------
 // | Helper tasks                                                      |
@@ -75,9 +79,11 @@ gulp.task('clean', (done) => {
 gulp.task('copy:index.html', () => {
 
   let modernizrVersion = pkg.devDependencies.modernizr;
+  let ga4Version = ga4.accountId;
 
   return gulp.src(`${dirs.src}/index.html`)
     .pipe(gulpReplace(/{{MODERNIZR_VERSION}}/g, modernizrVersion))
+    .pipe(gulpReplace(/{{GA_TAG}}/g, ga4Version))
     .pipe(gulp.dest(dirs.dist));
 });
 

@@ -55,6 +55,9 @@
       "dist": "dist",
       "src": "src",
       "test": "test"
+    },
+    "ga4": {
+      "accountId": "G-11CTGQV5LM"
     }
   },
   "files": [

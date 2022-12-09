@@ -56,6 +56,11 @@ function runTests() {
       checkString(path.resolve(dir, 'index.html'), string, done);
     });
 
+    it('"index.html" should contain the account ID for GA4', (done) => {
+      const string = `${pkg['h5bp-configs'].ga4.accountId}`;
+      checkString(path.resolve(dir, 'index.html'), string, done);
+    });
+
     it('"style.css" should contain a custom banner', function (done) {
       const string = `/*! HTML5 Boilerplate v${pkg.version} | ${pkg.license} License | ${pkg.homepage} */\n`;
       checkString(path.resolve(dir, 'css/style.css'), string, done);
