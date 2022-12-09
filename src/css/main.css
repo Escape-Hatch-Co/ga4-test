@@ -1,3 +1,17 @@
-h2 {
-  border: 1px solid red;
+.directions {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 200px;
+}
+
+.directions button {
+  display: block;
+}
+
+.directions button[data-dir="north"], .directions button[data-dir="south"] {
+  flex: 1 0 100%;
+}
+
+.directions button[data-dir="east"], .directions button[data-dir="west"] {
+  flex: 1 0 50%;
 }
