@@ -2,5 +2,5 @@
 archive
 node_modules
 packages
-dist/package-lock.json
+dist/*
 src/package-lock.json
