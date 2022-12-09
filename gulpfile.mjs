@@ -106,6 +106,14 @@ gulp.task('copy:style', () => {
     .pipe(gulp.dest(`${dirs.dist}/css`));
 });
 
+gulp.task('copy:custom_style', () => {
+  return gulp.src('src/css/main.css')
+    .pipe(gulpAutoPrefixer({
+      cascade: false
+    }))
+    .pipe(gulp.dest(`${dirs.dist}/css`));
+});
+
 gulp.task('copy:misc', () =>
   gulp.src([
     // Copy all files
@@ -126,17 +134,6 @@ gulp.task('copy:normalize', () =>
     .pipe(gulp.dest(`${dirs.dist}/css`))
 );
 
-gulp.task('modernizr', (done) => {
-  // TODO: rework this flow instead of just reacting to the fact that the jQuery step is gone
-  if (!fs.existsSync(`${dirs.dist}/js/vendor/`)){
-    fs.mkdirSync(`${dirs.dist}/js/vendor/`);
-  }
-
-  modernizr.build(modernizrConfig, (code) => {
-    fs.writeFile(`${dirs.dist}/js/vendor/modernizr-${pkg.devDependencies.modernizr}.min.js`, code, done);
-  });
-});
-
 gulp.task('lint:js', () =>
   gulp.src([
     `${dirs.src}/js/*.js`,
@@ -154,6 +151,7 @@ gulp.task(
     'copy:index.html',
     'copy:license',
     'copy:style',
+    'copy:custom_style',
     'copy:misc',
     'copy:normalize'
   )
@@ -163,8 +161,7 @@ gulp.task(
   'build',
   gulp.series(
     gulp.parallel('clean', 'lint:js'),
-    'copy',
-    'modernizr'
+    'copy'
   )
 );
 
